@@ -1,13 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:\Users\Familia\Documents\GitHub\Sprint6_Grupo_4\Problematica 3\itbank.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="2257"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:maincliente"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="cliente" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="117"/><column index="2" value="148"/><column index="3" value="175"/><column index="4" value="135"/><column index="5" value="91"/><column index="6" value="96"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">SELECT balance 
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:\Users\Familia\Documents\GitHub\Sprint6_Grupo_4\Problematica 3\itbank.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="2257"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:maincuenta"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="cliente" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="117"/><column index="2" value="148"/><column index="3" value="175"/><column index="4" value="135"/><column index="5" value="91"/><column index="6" value="96"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="cuenta" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="105"/><column index="2" value="117"/><column index="3" value="76"/><column index="4" value="298"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="prestamo" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="74"/><column index="2" value="115"/><column index="3" value="96"/><column index="4" value="98"/><column index="5" value="117"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="cuentas_balance_negativo">SELECT account_id, balance 
+FROM cuenta
+WHERE balance &lt; 0</sql><sql name="clientes_con_z_en_el_apellido">SELECT customer_name, customer_surname, dob
+FROM cliente
+WHERE customer_surname LIKE '%Z%'</sql><sql name="clientes_llamados_brendan">SELECT cliente.branch_id, 
+	   sucursal.branch_name,
+       cliente.customer_name, 
+       cliente.customer_surname, 
+	   cliente.dob
+FROM cliente
+JOIN sucursal on cliente.branch_id = sucursal.branch_id
+WHERE cliente.customer_name = 'Brendan'
+ORDER by sucursal.branch_name</sql><sql name="union_prestamos_mayores_a_80000_y_prestamos_prendarios">SELECT p. loan_id, p.loan_total, p.loan_type
+FROM prestamo p
+WHERE p.loan_total &gt; 8000000
+/*dos ceros agregados por los centavos*/
+UNION
+SELECT s.loan_id, s.loan_total, s.loan_type
+FROM prestamo s
+WHERE s.loan_type = 'PRENDARIO'</sql><sql name="prestamos_mayores_al_promedio">SELECT loan_id, loan_total
+FROM prestamo
+WHERE  loan_total &gt; (
+           SELECT avg(loan_total)
+		   FROM prestamo
+)</sql><sql name="SQL 7"></sql><sql name="5_cuentas_con_saldo_mayor_a_8000">SELECT account_id, balance
 FROM cuenta
-WHERE balance &lt; 0</sql><sql name="SQL 2">SELECT customer_name, customer_surname, dob
-FROM cliente
-WHERE customer_surname LIKE '%Z%'</sql><sql name="itbank.db">SELECT cliente.branch_id, 
-	   sucursal.branch_name,
-       cliente.customer_name, 
-       cliente.customer_surname, 
-	   cliente.dob
-FROM cliente
-JOIN sucursal on cliente.branch_id = sucursal.branch_id
-WHERE cliente.customer_name = 'Brendan'
-ORDER by sucursal.branch_name</sql><current_tab id="2"/></tab_sql></sqlb_project>
+WHERE balance &gt; 800000
+/*dos ceros agregados por los centavos*/
+LIMIT 5</sql><sql name="SQL 9"></sql><current_tab id="7"/></tab_sql></sqlb_project>
