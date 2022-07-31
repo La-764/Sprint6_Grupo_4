@@ -6,15 +6,4 @@ la 10 */
 
 UPDATE cliente
 SET branch_id = 10
-WHERE customer_id BETWEEN 501 AND 505
-
-
--- OTRA OPCIÓN (no se pudo comprobar)
--- YA QUE ES NECESARIO HABILITAR: SQLITE_ENABLE_UPDATE_DELETE_LIMIT
-
-/*
-UPDATE cliente
-SET branch_id = 10
-ORDER BY customer_id DESC
-LIMIT 5;
-*/
+WHERE customer_id IN (SELECT customer_id from cliente_backup ORDER BY customer_id DESC LIMIT 5);
