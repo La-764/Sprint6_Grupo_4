@@ -14,7 +14,6 @@ CREATE TABLE movimientos(
 -- o En caso de no poder realizar la operación de forma completa, realizar
 -- un ROLLBACK
 
-END TRANSACTION;
 BEGIN TRANSACTION;
  UPDATE cuenta set balance = balance - 1000
  WHERE account_id = 200;
@@ -24,4 +23,4 @@ BEGIN TRANSACTION;
 	account_id, monto, tipo_operacion, hora
  )
  VALUES(200, -1000, "transferencia", datetime("now")), (400, 1000, "transferencia", datetime("now"))
- commit;
+ ROLLBACK;
