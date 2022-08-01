@@ -1,7 +1,9 @@
 # Sprint6 Entregable
+En este repositorio se encuentra la entrega del Sprint 6 desarrollado por el grupo 4 de la comisión 9: "La 764".
 
-Cada problematica se va a entregar en una carpeta por separado.
-
-Para cara carpeta se tiene que dividir en archivos sql con cada punto dado, numerandolos. Se da un breve ejemplo en la problematica 1.
-
-NOTA: Recuerden que los archivos sql son las extensiones para consultas de baase de datos.
+## Integrantes:
+- Miguez Romero, Aldana Magalí
+- Pagano, Sergio Luis
+- Vega, Rocío Marina
+- Vittore, Lautaro
+- Triviño, Lautaro
